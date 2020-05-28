@@ -5,3 +5,11 @@
 .App .navbar-brand {
   font-weight: bold;
 }
+
+body{
+  background-image: url(./assets/img/clouds.jpg);
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+  height:1500px;
+}

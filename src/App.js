@@ -7,6 +7,7 @@ import Routes from "./Routes";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 import { onError } from "./libs/errorLib";
+import clouds from './assets/img/clouds.jpg'
 
 function App() {
 const history = useHistory();
@@ -38,7 +39,7 @@ async function handleLogout() {
 
 return (
   !isAuthenticating && (
-    <div className="App container">
+    <div className="App container" styles={{ backgroundImage:`url(${clouds})` }}>
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
