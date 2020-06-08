@@ -4,6 +4,7 @@
 
 .App .navbar-brand {
   font-weight: bold;
+  margin-top:-10px;
 }
 
 body{

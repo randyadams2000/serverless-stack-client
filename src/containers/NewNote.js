@@ -15,7 +15,8 @@ export default function NewNote() {
   const [isLoading, setIsLoading] = useState(false);
 
   function validateForm() {
-    return content.length > 0;
+  	return true;
+//    return content.length > 0;
   }
 
   function handleFileChange(event) {
@@ -57,15 +58,8 @@ function createNote(note) {
   return (
     <div className="NewNote">
       <form onSubmit={handleSubmit}>
-        <FormGroup controlId="content">
-          <FormControl
-            value={content}
-            componentClass="textarea"
-            onChange={e => setContent(e.target.value)}
-          />
-        </FormGroup>
         <FormGroup controlId="file">
-          <ControlLabel>Attachment</ControlLabel>
+          <ControlLabel>Select a picture file</ControlLabel>
           <FormControl onChange={handleFileChange} type="file" />
         </FormGroup>
         <LoaderButton

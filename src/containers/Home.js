@@ -46,7 +46,7 @@ function renderNotesList(notes) {
       <LinkContainer key="new" to="/notes/new">
         <ListGroupItem>
           <h4>
-            <b>{"\uFF0B"}</b> Create a new note
+            <b>{"\uFF0B"}</b> Add a picture of your self...
           </h4>
         </ListGroupItem>
       </LinkContainer>
@@ -57,8 +57,12 @@ function renderNotesList(notes) {
   function renderLander() {
     return (
       <div className="lander">
-        <h1>Immortify</h1>
-        <p>Create Your Immortal Avatar</p>
+        <h1>Become Immortal</h1>
+        <p>Let us create an immortal avatar that looks like you,<br/> sounds like you and tells the story of your life.</p>
+        <p>There is no charge or obligation, it's free and easy to create.</p>
+        <p>Simply upload a picture of yourself, record the answers<br/> to questions about your life and we'll create your avatar<br/> and send it to you when its ready.</p>
+        <p>All your information is kept private but you can choose<br/> to share your avatar with others if you wish.</p>
+        <p>To begin, simply click the Signup button above.</p>
       </div>
     );
   }
@@ -66,10 +70,11 @@ function renderNotesList(notes) {
   function renderNotes() {
     return (
       <div className="notes">
-        <PageHeader>Your Notes</PageHeader>
+        <PageHeader>Step 2 - Upload one or more pictures<br/> of yourself - A head shot facing camera.</PageHeader>
         <ListGroup>
           {!isLoading && renderNotesList(notes)}
         </ListGroup>
+        NEXT
       </div>
     );
   }

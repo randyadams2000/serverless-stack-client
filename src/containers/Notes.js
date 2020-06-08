@@ -121,14 +121,7 @@ return (
   <div className="Notes">
     {note && (
       <form onSubmit={handleSubmit}>
-        <FormGroup controlId="content">
-          <FormControl
-            value={content}
-            componentClass="textarea"
-            onChange={e => setContent(e.target.value)}
-          />
-        </FormGroup>
-        {note.attachment && (
+         {note.attachment && (
           <FormGroup>
             <ControlLabel>Attachment</ControlLabel>
             <FormControl.Static>
@@ -143,7 +136,7 @@ return (
           </FormGroup>
         )}
         <FormGroup controlId="file">
-          {!note.attachment && <ControlLabel>Attachment</ControlLabel>}
+          {!note.attachment && <ControlLabel>Load a picture file.</ControlLabel>}
           <FormControl onChange={handleFileChange} type="file" />
         </FormGroup>
         <LoaderButton

@@ -141,6 +141,7 @@ async function handleConfirmationSubmit(event) {
 
   return (
     <div className="Signup">
+  	<h1>Step 1 - Create an account</h1>
       {newUser === null ? renderForm() : renderConfirmationForm()}
     </div>
   );

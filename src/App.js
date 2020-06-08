@@ -37,13 +37,14 @@ async function handleLogout() {
   history.push("/login");
 }
 
+
 return (
   !isAuthenticating && (
     <div className="App container" styles={{ backgroundImage:`url(${clouds})` }}>
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Immortify</Link>
+            <Link to="/"><img src="../infinity.png" alt="Immortify"/></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
