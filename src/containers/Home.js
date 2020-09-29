@@ -60,7 +60,6 @@ function renderNotesList(notes) {
         <h1>Become Immortal</h1>
         <p>Let us create an immortal avatar that looks like you,<br/> sounds like you and tells the story of your life.</p>
         <p>There is no charge or obligation, it's free and easy to create.</p>
-        <p>Simply upload a picture of yourself, record the answers<br/> to questions about your life and we'll create your avatar<br/> and send it to you when its ready.</p>
         <p>All your information is kept private but you can choose<br/> to share your avatar with others if you wish.</p>
         <p>To begin, simply click the Signup button above.</p>
       </div>
