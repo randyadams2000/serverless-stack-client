@@ -56,6 +56,7 @@ function renderNotesList(notes) {
 
   function renderLander() {
     return (
+      <center>
       <div className="lander">
         <h1>Become Immortal</h1>
         <p>Let us create an immortal avatar that looks like you,<br/> sounds like you and tells the story of your life.</p>
@@ -63,6 +64,7 @@ function renderNotesList(notes) {
         <p>All your information is kept private but you can choose<br/> to share your avatar with others if you wish.</p>
         <p>To begin, simply click the Signup button above.</p>
       </div>
+      </center>
     );
   }
 
