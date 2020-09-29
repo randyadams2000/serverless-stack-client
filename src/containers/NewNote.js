@@ -11,7 +11,7 @@ import { s3Upload } from "../libs/awsLib";
 export default function NewNote() {
   const file = useRef(null);
   const history = useHistory();
-  const [content, setContent] = useState("");
+//  const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   function validateForm() {
