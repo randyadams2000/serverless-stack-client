@@ -71,7 +71,6 @@ function renderNotesList(notes) {
   function renderNotes() {
     return (
       <div className="notes">
-        <PageHeader>Step 2 - Upload one or more pictures<br/> of yourself - A head shot facing camera.</PageHeader>
         <ListGroup>
           {!isLoading && renderNotesList(notes)}
         </ListGroup>
