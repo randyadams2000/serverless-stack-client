@@ -58,7 +58,7 @@ function renderNotesList(notes) {
     return (
       <center>
       <div className="lander">
-        <h1>Stand Up for Yourself After You're Dead</h1>
+        <h1>Stand Up for Yourself <br> After You're Dead</h1>
         <p>Let us create an immortal avatar that looks like you,<br/> sounds like you and tells the story of your life.</p>
         <p>There is no charge or obligation, it's free and easy to create.</p>
         <p>All your information is kept private but you can choose<br/> to share your avatar with others if you wish.</p>
