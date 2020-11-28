@@ -12,7 +12,6 @@ export default function Record() {
 return (
   <div className="Notes">
   <PageHeader>Record</PageHeader>
-  <h2 id="prompt">Click Start Button Below</h2>
   <button id="btn-start-recording">
       Start Recording
   </button>
