@@ -23,7 +23,7 @@ return (
       Cancel Upload
   </button>
   <hr/>
-  <video autoplay="" controls="" id="my-preview" style="height:100%;width:100%;">
+  <video autoplay="" controls="" id="my-preview">
   </video>
   <p id="percentage">
   </p>
