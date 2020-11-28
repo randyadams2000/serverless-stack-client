@@ -12,6 +12,21 @@ export default function Record() {
 return (
   <div className="Notes">
   <PageHeader>Record</PageHeader>
-  </div>
-);
-}
+<h2 id="prompt">Click Start Button Below</h2>
+        <button id="btn-start-recording">
+            Start Recording
+        </button>
+        <button disabled="disabled" id="btn-stop-recording">
+            Stop Recording
+        </button>
+        <button id="cancel-button">
+            Cancel Upload
+        </button>
+         <hr/>
+            <video autoplay="" controls="" id="my-preview" style="height:100%;width:100%;">
+            </video>
+            <p id="percentage">
+            </p>
+            <div id="results">
+    </div>
+)
