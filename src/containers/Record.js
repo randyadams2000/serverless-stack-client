@@ -6,9 +6,8 @@ import {  } from "react-router-dom";
 //import LoaderButton from "../components/LoaderButton";
 import { PageHeader } from "react-bootstrap";
 import "./Record.css";
-import "./recordRTC.js";
-import "./recordRTCc.js";
 import "./main.js";
+
 //import { s3Upload } from "../libs/awsLib";
 
 export default function Record() {
