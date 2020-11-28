@@ -9,6 +9,8 @@ import "./Record.css";
 //import { s3Upload } from "../libs/awsLib";
 
 
+
+
 AWS.config.region = 'us-east-1'; // 1. Enter your region
 
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -168,26 +170,6 @@ document.getElementById('btn-start-recording').disabled = false;
 console.error('stopRecording failure', error);
 });
 }, false);
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-        function myFunction() {
-            modal.style.display = "block";
-        }
          
 function listObjs() {
 var prefix = '';
@@ -294,6 +276,21 @@ function attachSinkId(element, sinkId) {
 function handleError(error) {
     console.log('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
   }
+/*  
+  // Request access to the media devices
+  navigator.mediaDevices.getUserMedia({
+    audio: true, 
+    video: true
+    }).then(function(stream) {
+    // Display a live preview on the video element of the page
+    setSrcObject(stream, video);
+    
+    // Start to display the preview on the video element
+    // and mute the video to disable the echo issue !
+    video.play();
+    video.muted = true;
+    })
+ */ 
 
 function start() {
   if (window.stream) {
@@ -320,8 +317,6 @@ function start() {
 audioInputSelect.onchange = start;
 videoSelect.onchange = start;
 start();
-
-
 
 
 
