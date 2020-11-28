@@ -17,12 +17,12 @@ export default function Record() {
 
 
 
-  AWS.config.region = 'us-east-2'; // 1. Enter your region
+  AWS.config.region = 'us-east-1'; // 1. Enter your region
 
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: 'us-east-2:333333-0768569a-664443-23333333377' // 2. Enter your identity pool
+      IdentityPoolId: 'us-east-1:7ea26b5d-926b-44fd-8936-f8bec3c89452' // 2. Enter your identity pool
   });
-
+  
   AWS.config.credentials.get(function(err) {
       if (err) alert(err);
       console.log(AWS.config.credentials);
@@ -133,7 +133,6 @@ var objKey = 'testing/' + url_file.name;
      // console.log(progress.loaded + " of " + progress.total + " bytes");
   }).send(function(err, data){
       percentage.innerHTML = "File has been uploaded successfully.";
-      listObjs();
   });
 
 
