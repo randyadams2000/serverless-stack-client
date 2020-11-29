@@ -1,5 +1,5 @@
 import React, {} from "react";
-import ScriptTag from 'react-script-tag';
+//import ScriptTag from 'react-script-tag';
 import {  } from "react-router-dom";
 import {Helmet} from "react-helmet";
 //import { API, Storage } from "aws-amplify";
