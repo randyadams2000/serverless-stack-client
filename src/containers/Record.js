@@ -1,16 +1,30 @@
 import React, {} from "react";
+import ScriptTag from 'react-script-tag';
 import {  } from "react-router-dom";
+import {Helmet} from "react-helmet";
 //import { API, Storage } from "aws-amplify";
 //import { onError } from "../libs/errorLib";
 //import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 //import LoaderButton from "../components/LoaderButton";
 import { PageHeader } from "react-bootstrap";
 import "./Record.css";
-import "./main.js";
 
 //import { s3Upload } from "../libs/awsLib";
 
 export default function Record() {
+
+
+<Helmet>
+<script src="./recordRTC.js" type="text/javascript" />
+</Helmet>
+<Helmet>
+  <script src="./main.js" type="text/javascript" />
+</Helmet>
+<Helmet>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js" type="text/javascript" />
+</Helmet>
+
+
 return (
   <div className="Notes">
   <PageHeader>Record</PageHeader>
