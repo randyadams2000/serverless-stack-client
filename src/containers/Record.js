@@ -16,12 +16,8 @@ export default function Record() {
 
 <Helmet>
 <script src="./recordRTC.js" type="text/javascript" />
-</Helmet>
-<Helmet>
-  <script src="./main.js" type="text/javascript" />
-</Helmet>
-<Helmet>
-  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js" type="text/javascript" />
+<script src="./main.js" type="text/javascript" />
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js" type="text/javascript" />
 </Helmet>
 
 
