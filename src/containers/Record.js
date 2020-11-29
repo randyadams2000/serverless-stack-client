@@ -14,7 +14,6 @@ import "./Record.css";
 //import { s3Upload } from "../libs/awsLib";
 
 export default function Record(props) {
-    const recordWebcam = useRecordWebcam();
 return (
     <VideoRecorder 
     onRecordingComplete={(videoBlob) => {
