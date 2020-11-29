@@ -1,6 +1,6 @@
 import React from "react";
-//import {  } from "react-router-dom";
-import { render } from 'react-dom'
+import {  } from "react-router-dom";
+//import { render } from 'react-dom'
 import VideoRecorder from 'react-video-recorder'
 //import { useRecordWebcam } from 'react-record-webcam'
 //import {Helmet} from "react-helmet";
