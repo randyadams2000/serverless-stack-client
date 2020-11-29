@@ -2,7 +2,7 @@ import React from "react";
 import {  } from "react-router-dom";
 //import { render } from 'react-dom'
 import VideoRecorder from 'react-video-recorder'
-import { View } from 'react-native';
+import styled from 'styled-components'
 
 //import { useRecordWebcam } from 'react-record-webcam'
 //import {Helmet} from "react-helmet";
@@ -15,10 +15,14 @@ import "./Record.css";
 
 //import { s3Upload } from "../libs/awsLib";
 
+const styledVideoRecorder = styled VideoRecorder
+    width: 1024px;
+    height: 900px;
+    ;
+
 export default function Record(props) {
 return (
-    <View style={{width: 1280, height: 720}}></View>
-    <VideoRecorder 
+    <styledVideoRecorder 
      isOnInitially
     onRecordingComplete={(videoBlob) => {
       // Do something with the video...
