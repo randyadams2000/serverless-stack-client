@@ -2,6 +2,7 @@ import React from "react";
 import {  } from "react-router-dom";
 //import { render } from 'react-dom'
 import VideoRecorder from 'react-video-recorder'
+import { View } from 'react-native';
 
 //import { useRecordWebcam } from 'react-record-webcam'
 //import {Helmet} from "react-helmet";
@@ -16,6 +17,7 @@ import "./Record.css";
 
 export default function Record(props) {
 return (
+    <View style={{width: 1280, height: 720}}></View>
     <VideoRecorder 
      isOnInitially
     onRecordingComplete={(videoBlob) => {
