@@ -17,6 +17,7 @@ import "./Record.css";
 export default function Record(props) {
 return (
     <VideoRecorder 
+     isOnInitially
     onRecordingComplete={(videoBlob) => {
       // Do something with the video...
       console.log('videoBlob', videoBlob)
