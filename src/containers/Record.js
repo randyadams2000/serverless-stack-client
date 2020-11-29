@@ -15,10 +15,10 @@ import "./Record.css";
 
 //import { s3Upload } from "../libs/awsLib";
 
-const styledVideoRecorder = styled VideoRecorder
+const styledVideoRecorder = styled VideoRecorder'
     width: 1024px;
     height: 900px;
-    ;
+    ';
 
 export default function Record(props) {
 return (
