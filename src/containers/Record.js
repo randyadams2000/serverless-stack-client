@@ -57,7 +57,7 @@ return (
         new Promise(async (resolve, reject) =>  {
             Storage.put('test.mp4', videoBlob, { contentType: 'video/mp4' })
             .then(result => resolve(result))
-            .catch(err => reject({error: err, object: blob})); 
+            .catch(err => reject({error: err, object: videoBlob})); 
         });
 
     }
