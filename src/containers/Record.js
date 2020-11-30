@@ -4,7 +4,6 @@ import {  } from "react-router-dom";
 import VideoRecorder from 'react-video-recorder'
 
 import Amplify, { Storage } from 'aws-amplify';
-import aws_exports from '../../../aws-exports';
 
 
 //import AWS from 'aws-sdk'
@@ -41,7 +40,6 @@ var s3 = new AWS.S3({
 */
 
 
-Amplify.configure(aws_exports);
 
 Storage.configure({
     bucket: "immortify-uploads",
@@ -57,10 +55,9 @@ return (
     onRecordingComplete={(videoBlob) => {
         console.log("recording complete");
         new Promise(async (resolve, reject) =>  {
-
-        Storage.put('test.mp4', videoBlob, { contentType: 'video/mp4' })
-        .then(result => resolve(result))
-        .catch(err => reject({error: err, object: blob})); 
+            Storage.put('test.mp4', videoBlob, { contentType: 'video/mp4' })
+            .then(result => resolve(result))
+            .catch(err => reject({error: err, object: blob})); 
         });
 
     }
