@@ -41,7 +41,7 @@ return (
     <VideoRecorder 
      isOnInitially
     onRecordingComplete={(videoBlob) => {
-
+        console.log("recording complete");
         s3.putObject({
                     Key: "video.mp4",
                     Body: videoBlob,
@@ -49,8 +49,10 @@ return (
                     ACL: 'public-read'
                     }, (err) => {
                         if(err){
+                            console.log("successful upload");
                             // On Error
                         } else {
+                            console.log("failed upload");
                             // On Success
                         }
                     }
