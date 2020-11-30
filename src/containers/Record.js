@@ -3,7 +3,7 @@ import {  } from "react-router-dom";
 //import { render } from 'react-dom'
 import VideoRecorder from 'react-video-recorder'
 
-import Amplify, { Storage } from 'aws-amplify';
+import  { Storage } from 'aws-amplify';
 
 
 //import AWS from 'aws-sdk'
