@@ -57,7 +57,7 @@ return (
                         }
                     }
                 );
-//      console.log('videoBlob', videoBlob)
+      console.log('videoBlob', videoBlob)
     }} 
   />
   </div>
