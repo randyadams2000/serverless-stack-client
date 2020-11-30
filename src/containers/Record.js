@@ -2,7 +2,7 @@ import React from "react";
 import {  } from "react-router-dom";
 //import { render } from 'react-dom'
 import VideoRecorder from 'react-video-recorder'
-import AWS from 'aws-sdk';
+import AWS from 'aws-sdk'
 //import { API } from "aws-amplify";
 //import { s3Upload } from "../libs/awsLib";
 
