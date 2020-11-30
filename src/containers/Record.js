@@ -2,7 +2,12 @@ import React from "react";
 import {  } from "react-router-dom";
 //import { render } from 'react-dom'
 import VideoRecorder from 'react-video-recorder'
-import AWS from 'aws-sdk'
+
+import Amplify, { Storage } from 'aws-amplify';
+import aws_exports from '../../../aws-exports';
+
+
+//import AWS from 'aws-sdk'
 //import { API } from "aws-amplify";
 //import { s3Upload } from "../libs/awsLib";
 
@@ -18,7 +23,7 @@ import "./Record.css";
 
 //import { s3Upload } from "../libs/awsLib";
 
-
+/*
 AWS.config.update({
     credentials: new AWS.CognitoIdentityCredentials({
         IdentityPoolId: 'us-east-1:58369085-ac6e-44af-9b1e-bc749d769f09'
@@ -33,6 +38,15 @@ var s3 = new AWS.S3({
     }
 });
 
+*/
+
+
+Amplify.configure(aws_exports);
+
+Storage.configure({
+    bucket: "immortify-uploads",
+    level: "public",
+});
 
 
 export default function Record(props) {
@@ -42,6 +56,16 @@ return (
      isOnInitially
     onRecordingComplete={(videoBlob) => {
         console.log("recording complete");
+        new Promise(async (resolve, reject) =>  {
+
+        Storage.put('test.mp4', videoBlob, { contentType: 'video/mp4' })
+        .then(result => resolve(result))
+        .catch(err => reject({error: err, object: blob})); 
+        });
+
+    }
+
+ /*       
         s3.putObject({
                     Key: "video.mp4",
                     Body: videoBlob,
@@ -57,8 +81,9 @@ return (
                         }
                     }
                 );
-      console.log('videoBlob', videoBlob)
-    }} 
+*/
+ //     console.log('videoBlob', videoBlob)
+    }
   />
   </div>
 );
