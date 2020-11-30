@@ -21,7 +21,7 @@ import "./Record.css";
 
 AWS.config.update({
     credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: 'us-east-1:7ea26b5d-926b-44fd-8936-f8bec3c89452'
+        IdentityPoolId: 'us-east-1:58369085-ac6e-44af-9b1e-bc749d769f09'
     })
 })
 AWS.config.apiVersions = {
@@ -29,7 +29,7 @@ AWS.config.apiVersions = {
 };
 var s3 = new AWS.S3({
     params: { 
-        Bucket: 'immortify-videos' 
+        Bucket: 'immortify-uploads' 
     }
 });
 
