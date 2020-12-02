@@ -23,7 +23,7 @@ export default function Record(props) {
         try {
             const attachment = await s3UploadBlob("video.mp4",videoBlob);
             await createNote({ content, attachment });
-            history.push("/");
+//            history.push("/");
         } catch (e) {
             onError(e);
         }
