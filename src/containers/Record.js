@@ -32,7 +32,7 @@ export default function Record(props) {
         <div className="Record">
         <Button
             disabled={disabled}
-            >SAVE</Button>
+            >SAVE RECORDING</Button>
         <VideoRecorder 
             isOnInitially
             onRecordingComplete={(videoBlob) => {
