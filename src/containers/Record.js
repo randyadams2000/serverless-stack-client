@@ -9,7 +9,7 @@ import "./Record.css";
 
 
 export default function Record(props) {
-    const history = useHistory();
+ //   const history = useHistory();
     const [content] = useState("");
     var disabled = true;
 
