@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import VideoRecorder from 'react-video-recorder'
 import { API } from "aws-amplify";
