@@ -8,4 +8,13 @@ export async function s3Upload(file) {
   });
 
   return stored.key;
+
+}export async function s3UploadBlob(file, blob) {
+  const filename = `${Date.now()}-${file}`;
+
+  const stored = await Storage.vault.put(filename, blob, {
+    contentType: 'video/mp4',
+  });
+
+  return stored.key;
 }
