@@ -11,14 +11,14 @@ import "./Record.css";
 export default function Record(props) {
     const history = useHistory();
     const [content] = useState("");
-    var diaabled = true;
+    var disabled = true;
 
     function createNote(note) {
         return API.post("notes", "/notes", {
           body: note
         });
       }
-      
+
     async function uploadVideo(videoBlob) {
         try {
             const attachment = await s3UploadBlob("video.mp4",videoBlob);
