@@ -11,8 +11,9 @@ import "./Record.css";
 export default function Record(props) {
     const history = useHistory();
     const [content] = useState("");
-    disabled = true
-
+    isLoading,
+    disabled = false,
+    ...props
     function createNote(note) {
         return API.post("notes", "/notes", {
           body: note
@@ -32,7 +33,7 @@ export default function Record(props) {
     return (
         <div className="Record">
         <Button
-            disabled={disabled}
+            disabled={disabled || isLoading}
             >SAVE RECORDING</Button>
         <VideoRecorder 
             isOnInitially
