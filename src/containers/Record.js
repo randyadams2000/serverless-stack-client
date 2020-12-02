@@ -4,31 +4,29 @@ import VideoRecorder from 'react-video-recorder'
 import { API } from "aws-amplify";
 import { s3UploadBlob } from "../libs/awsLib";
 import { onError } from "../libs/errorLib";
+import "./Record.css";
 
 
 export default function Record(props) {
     const history = useHistory();
     const [content] = useState("");
-    const [setIsLoading] = useState(false);
 
     function createNote(note) {
         return API.post("notes", "/notes", {
           body: note
         });
       }
-async function uploadVideo(videoBlob) {
-    setIsLoading(true);
-    try {
-        const attachment = await s3UploadBlob("video.mp4",videoBlob);
-        await createNote({ content, attachment });
-        history.push("/");
-    } catch (e) {
-        onError(e);
-        setIsLoading(false);
-    }
+    async function uploadVideo(videoBlob) {
+        try {
+            const attachment = await s3UploadBlob("video.mp4",videoBlob);
+            await createNote({ content, attachment });
+            history.push("/");
+        } catch (e) {
+            onError(e);
+        }
 
-}
-      
+    }
+        
     return (
         <div className="Record">
         <VideoRecorder 
