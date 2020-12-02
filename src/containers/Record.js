@@ -7,10 +7,9 @@ import { onError } from "../libs/errorLib";
 
 
 export default function Record(props) {
-    const file = useRef(null);
     const history = useHistory();
-    const [content, setContent] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [content] = useState("");
+    const [setIsLoading] = useState(false);
 
     function createNote(note) {
         return API.post("notes", "/notes", {
