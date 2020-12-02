@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import VideoRecorder from 'react-video-recorder'
 import { API } from "aws-amplify";
 import { s3UploadBlob } from "../libs/awsLib";
+import { onError } from "../libs/errorLib";
 
 
 export default function Record(props) {
