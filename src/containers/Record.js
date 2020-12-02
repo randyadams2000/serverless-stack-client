@@ -11,6 +11,7 @@ import "./Record.css";
 export default function Record(props) {
     const history = useHistory();
     const [content] = useState("");
+    disabled = true
 
     function createNote(note) {
         return API.post("notes", "/notes", {
