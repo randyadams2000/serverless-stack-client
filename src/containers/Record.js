@@ -31,8 +31,7 @@ export default function Record(props) {
     return (
         <div className="Record">
         <Button
-            disabled=disabled
-            varient="success"
+            disabled={disabled}
             >SAVE</Button>
         <VideoRecorder 
             isOnInitially
