@@ -16,6 +16,8 @@ export default function Record(props) {
           body: note
         });
       }
+
+
     return (
         <div className="Record">
         <VideoRecorder 
@@ -24,7 +26,7 @@ export default function Record(props) {
                 console.log("recording complete");
                 setIsLoading(true);
                 try {
-                    const attachment = await s3UploadBlob("video.mp4",videoBlob);
+                    const attachment = s3UploadBlob("video.mp4",videoBlob);
                     await createNote({ content, attachment });
                     history.push("/");
                 } catch (e) {
