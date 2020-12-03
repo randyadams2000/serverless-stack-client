@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 //import { useHistory } from "react-router-dom";
 import { Button         } from "react-bootstrap";
-import {VideoRecorder} from "../libs/index.js";
-//import VideoRecorder from 'react-video-recorder'
+import VideoRecorder from 'react-video-recorder'
 import { API } from "aws-amplify";
 import { s3UploadBlob } from "../libs/awsLib";
 import { onError } from "../libs/errorLib";
