@@ -20,7 +20,7 @@ export default function Record(props) {
         });
       }
 
-    async function uploadVideo(videoBlob) {
+    async function uploadVideo(videoBlob) { 
         try {
             const attachment = await s3UploadBlob("video.mp4",videoBlob);
             await createNote({ content, attachment });
