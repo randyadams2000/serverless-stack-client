@@ -37,6 +37,8 @@ export default function Record(props) {
             >SAVE RECORDING</Button>
         <VideoRecorder 
             isOnInitially
+            showReplayControls
+            replayVideoAutoplayAndLoopOff
             onRecordingComplete={(videoBlob) => {
                 uploadVideo(videoBlob);
                 console.log("recording complete");
