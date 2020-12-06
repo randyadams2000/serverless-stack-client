@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 //import { useHistory } from "react-router-dom";
-import { Button         } from "react-bootstrap";
 import VideoRecorder from 'react-video-recorder'
 import { API } from "aws-amplify";
 import { s3UploadBlob } from "../libs/awsLib";
@@ -8,10 +7,10 @@ import { onError } from "../libs/errorLib";
 import "./Record.css";
 
 
+
 export default function Record(props) {
  //   const history = useHistory();
     const [content] = useState("");
-    var disabled = true;
 
     function createNote(note) {
         return API.post("notes", "/notes", {
@@ -29,22 +28,24 @@ export default function Record(props) {
         }
 
     }
-        
+    var theVideoBlob;
+
+
+
     return (
         <div className="Record">
-        <Button
-            disabled={disabled}
-            >SAVE RECORDING</Button>
         <VideoRecorder 
             isOnInitially
-            showReplayControls
-            replayVideoAutoplayAndLoopOff
             onRecordingComplete={(videoBlob) => {
-                uploadVideo(videoBlob);
+                theVideoBlob = videoBlob;
                 console.log("recording complete");
-            }        
-            }
+            }}        
+            onSaveVideo={() => {
+                uploadVideo(theVideoBlob);
+                console.log("uploaded");
+            }}        
         />
+            
         </div>
     );
 }
