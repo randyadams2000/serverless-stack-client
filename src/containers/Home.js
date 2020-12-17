@@ -75,7 +75,6 @@ function renderNotesList(notes) {
         <ListGroup>
           {!isLoading && renderNotesList(notes)}
         </ListGroup>
-        NEXT
       </div>
     );
   }
