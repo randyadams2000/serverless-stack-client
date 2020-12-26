@@ -30,14 +30,16 @@ useEffect(() => {
 }, [isAuthenticated]);
 
 function loadNotes() {
-  return API.getPromptCategory("notes", "/notes");
+  console.log(API.get("notes","/prompts"));
+  return API.get("notes","/prompts");
+
 }
 
   function renderNotesList(notes) {
     return [{}].concat(notes).map((note, i) =>
       i !== 0 ? (
-          <ListGroupItem header={note.content.trim().split("\n")[0]}>
-            {"Created: " + new Date(note.createdAt).toLocaleString()}
+          <ListGroupItem >
+            {note.prompt}
           </ListGroupItem>
       ) : (
           <ListGroupItem>
