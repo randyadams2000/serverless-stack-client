@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 //import { useHistory } from "react-router-dom";
-import { Button, Modal, PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { useAppContext } from "../libs/contextLib";
 import VideoRecorder from 'react-video-recorder'
 import { API } from "aws-amplify";
@@ -10,17 +10,15 @@ import styled from 'styled-components';
 import "./Record.css";
 
 
-
 export default function Record(props) {
  //   const history = useHistory();
  
-    const [modalShow, setModalShow] = React.useState(false);
-    const [content] = useState("");
-    const [notes, setNotes] = useState([]);
-    const { isAuthenticated } = useAppContext();
-    const [isLoading, setIsLoading] = useState(true);
-
-    var questionCount = 0;
+ const [modalShow, setModalShow] = React.useState(false);
+ const [content] = useState("");
+ const [mobileBody, setMobileBody] = useState("Please identify yourself by telling us your name and where you were born, then prompt the listener to ask you questions about your life.");
+  const [notes, setNotes] = useState([]);
+  const {isAuthenticated } = useAppContext();
+  const [isLoading, setIsLoading] = useState(true);
   
 
     useEffect(() => {
@@ -38,7 +36,6 @@ export default function Record(props) {
           setIsLoading(false);
           setModalShow(true);
         }
-      
         onLoad();
       }, [isAuthenticated]);
       
@@ -60,6 +57,9 @@ export default function Record(props) {
       }
 
     async function uploadVideo(videoBlob) { 
+
+        setModalShow(true);
+
         try {
             const attachment = await s3UploadBlob("video.mp4",videoBlob);
             await createNote({ content, attachment });
@@ -68,16 +68,9 @@ export default function Record(props) {
         } catch (e) {
             onError(e);
         }
-
     }
     var theVideoBlob;
-    var title = questionCount === 0 ? ("Recording Instructions") : ("Question");
-    var body = questionCount === 0 ? ("<h4>You will be presented with a series of questions.  You can choose to record and asnwer to the question or skip to the next question.<p>The more questions you answer the better your immorticon will become, so try to answer every question.<p>First you will be presented with a question and you need to click OK to begin the process of answering the question.<p>At that point you just need to click the red record button to start the recording (a countdown timer will give you 3 seconds to prepare then start recording. Click the red squaree button to end the recording. <p>After you stop recording, the recording will play and you can decide to accept that recording or re-record it.<p>Please try to keep your head inside the green circle and look directly into the camera.  It is also important to end the recording with your body and face in the same position and expression it was when you started the recording or the system will not appear natural between responses.<p>Also please answer the question as if a person just asked you the question, don't repeat the question.</h4>")
-    :
-    (
-      getPrompt()
-    );
-
+   
     const Button1 = styled.button`
     cursor: pointer;
     background: transparent;
@@ -96,57 +89,6 @@ export default function Record(props) {
   `;
    
 
-  function MyVerticallyCenteredModal(props) {
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            <b>{title}</b>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <div  dangerouslySetInnerHTML={{__html: body}}></div>
-        </Modal.Body>
-        <Modal.Footer>
-        questionCount === 0 ? (
-          <Button onClick={props.onHide}>OK</Button>)
-          :
-          (
-            <Button onClick={props.onHide}>OK</Button>
-            <Button onClick={props.onHide}>SKIP</Button>
-          );
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-
-  function questionModal(props) {
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            <b>{title}</b>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <div  dangerouslySetInnerHTML={{__html: body}}></div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>OK</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
     
 
     return (
@@ -156,21 +98,34 @@ export default function Record(props) {
             onRecordingComplete={(videoBlob) => {
                 theVideoBlob = videoBlob;
                 console.log("recording complete");
-                console.log(getPrompt().prompt);
+//                console.log(getPrompt().prompt);
             }}        
             onSaveVideo={() => {
+                setMobileBody(getPrompt().prompt);
                 uploadVideo(theVideoBlob);
                 console.log("uploaded");
             }}        
         />
         <Button1>PLEASE KEEP FACE INSIDE THIS</Button1>
+        <h2>Question: {mobileBody}</h2>
 
         <>
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+
+        <Modal show={modalShow} onHide={() => setModalShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title><h1>Record an Answer to This:</h1></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div><h2>{mobileBody}</h2></div>
+        </Modal.Body>
+        <Modal.Footer>
+        <center>
+            <Button color="green" size="lg" onClick={() => setModalShow(false)}>OK</Button>
+        </center>
+        </Modal.Footer>
+      </Modal>
       </>
+
 
         </div>
     );
