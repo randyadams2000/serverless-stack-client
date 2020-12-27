@@ -14,13 +14,14 @@ export default function Record(props) {
  //   const history = useHistory();
  
  const [modalShow, setModalShow] = React.useState(false);
- const [content] = useState("");
- const [mobileBody, setMobileBody] = useState("Please identify yourself by telling us your name and where you were born, then prompt the listener to ask you questions about your life.");
+ const [modalBody, setModalBody] = useState("");
+ const [promptContent, setPromptContent] = useState("Origin Content");
+ const [promptIdent, setPromptIdent] = useState("100");
   const [notes, setNotes] = useState([]);
   const {isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
-  
 
+  
     useEffect(() => {
         async function onLoad() {
           if (!isAuthenticated) {
@@ -30,6 +31,10 @@ export default function Record(props) {
           try {
             const notes = await loadNotes();
             setNotes(notes);
+            var note = notes.shift();
+            setPromptIdent(note.prompt_id);
+            setPromptContent(note.prompt);
+            setModalBody(note.prompt);
           } catch (e) {
             onError(e);
           }
@@ -46,7 +51,10 @@ export default function Record(props) {
       }
 
       function getPrompt() {
-        return notes.shift();
+        var theNote = notes.shift();
+        setPromptContent(theNote.prompt);
+        setPromptIdent(theNote.prompt_id);
+        return theNote;
       };
       
       
@@ -57,13 +65,13 @@ export default function Record(props) {
       }
 
     async function uploadVideo(videoBlob) { 
-
-        setModalShow(true);
-
         try {
+            const content = promptContent;
+            const promptId = promptIdent;
+            setModalBody(getPrompt().prompt);
+            setModalShow(true);
             const attachment = await s3UploadBlob("video.mp4",videoBlob);
-            await createNote({ content, attachment });
-            console.log(attachment);
+            await createNote({ promptId, content, attachment });
 //            history.push("/");
         } catch (e) {
             onError(e);
@@ -101,13 +109,14 @@ export default function Record(props) {
 //                console.log(getPrompt().prompt);
             }}        
             onSaveVideo={() => {
-                setMobileBody(getPrompt().prompt);
                 uploadVideo(theVideoBlob);
+//                setModalBody(getPrompt().prompt);
                 console.log("uploaded");
+//                setModalShow(true);
             }}        
         />
         <Button1>PLEASE KEEP FACE INSIDE THIS</Button1>
-        <h2>Question: {mobileBody}</h2>
+        <h2>Question: {modalBody}</h2>
 
         <>
 
@@ -116,7 +125,7 @@ export default function Record(props) {
           <Modal.Title><h1>Record an Answer to This:</h1></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div><h2>{mobileBody}</h2></div>
+          <div><h2>{modalBody}</h2></div>
         </Modal.Body>
         <Modal.Footer>
         <center>
