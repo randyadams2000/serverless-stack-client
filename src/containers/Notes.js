@@ -21,7 +21,7 @@ const [isDeleting, setIsDeleting] = useState(false);
     function loadNote() {
       return API.get("notes", `/notes/${id}`);
     }
-
+    console.log("noteid=" + {id});
     async function onLoad() {
       try {
         const note = await loadNote();
@@ -46,7 +46,8 @@ function validateForm() {
 }
 
 function formatFilename(str) {
-  return str.replace(/^\w+-/, "");
+  return str;
+//  return str.replace(/^\w+-/, "");
 }
 
 function handleFileChange(event) {

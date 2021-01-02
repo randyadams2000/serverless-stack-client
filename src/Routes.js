@@ -9,6 +9,7 @@ import Notes from "./containers/Notes";
 import Record from "./containers/Record";
 import Settings from "./containers/Settings";
 import Prompts from "./containers/Prompts";
+import Simulate from "./containers/Simulate";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 
@@ -38,6 +39,9 @@ export default function Routes() {
 </AuthenticatedRoute>
 <AuthenticatedRoute exact path="/prompts">
   <Prompts /> 
+</AuthenticatedRoute>
+<AuthenticatedRoute exact path="/simulate">
+  <Simulate /> 
 </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}
 	<Route>

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
-import { API } from "aws-amplify";
+import { API , Storage} from "aws-amplify";
 import "./Prompts.css";
+import { LinkContainer } from "react-router-bootstrap";
 
 export default function Prompts() {
   const [notes, setNotes] = useState([]);
@@ -30,29 +31,51 @@ useEffect(() => {
 }, [isAuthenticated]);
 
 function loadNotes() {
-  console.log(API.get("notes","/prompts"));
-  return API.get("notes","/prompts");
-
+  return API.get("notes", "/notes");
 }
+
+async function getURL(theURL)
+  {
+    return await Storage.vault.get(theURL)
+  }
 
   function renderNotesList(notes) {
     return [{}].concat(notes).map((note, i) =>
       i !== 0 ? (
-          <ListGroupItem >
-            {note.prompt}
+        <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
+          <ListGroupItem header={note.content.trim().split("\n")[0]}>
+            {"Created: " + new Date(note.createdAt).toLocaleString()}
           </ListGroupItem>
+        </LinkContainer>
       ) : (
+        <LinkContainer key="new" to="/notes/new">
           <ListGroupItem>
-           
+            <h4>
+              <b>{"\uFF0B"}</b> Add a picture of your self...
+            </h4>
           </ListGroupItem>
+        </LinkContainer>
       )
     );
   }
+  
+
+function renderNotes() {
+  return (
+    <div className="notes">
+      <PageHeader>Immorticon List</PageHeader>
+      <ListGroup>
+        {!isLoading && renderNotesList(notes)}
+      </ListGroup>
+    </div>
+  );
+}
+
 
   function renderNotes() {
     return (
       <div className="notes">
-        <PageHeader>Question List</PageHeader>
+        <PageHeader>Recordings</PageHeader>
         <ListGroup>
           {!isLoading && renderNotesList(notes)}
         </ListGroup>

@@ -52,8 +52,11 @@ return (
           <Nav pullRight>
             {isAuthenticated ? (
               <>
-              <LinkContainer to="/prompts">
-                  <NavItem>Prompts</NavItem>
+              <LinkContainer to="/simulate">
+                  <NavItem>Simulate</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/prompts">
+                  <NavItem>Recordings</NavItem>
                 </LinkContainer>
                 <LinkContainer to="/record">
                   <NavItem>Record</NavItem>
