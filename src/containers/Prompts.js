@@ -51,7 +51,6 @@ async function getURL(theURL)
         <LinkContainer key="new" to="/notes/new">
           <ListGroupItem>
             <h4>
-              <b>{"\uFF0B"}</b> Add a picture of your self...
             </h4>
           </ListGroupItem>
         </LinkContainer>
