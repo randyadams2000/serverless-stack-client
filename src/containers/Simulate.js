@@ -5,10 +5,13 @@ import { Interactions } from 'aws-amplify';
 import { onError } from "../libs/errorLib";
 import { useAppContext } from "../libs/contextLib";
 import { API, Storage } from "aws-amplify";
+import {Button, Fade} from "react-bootstrap"
+
 
 
 export default function Simulate() {
-
+  const [open1, setOpen1] = useState(true);
+  const [open2, setOpen2] = useState(false);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   const [note, setNote] = useState(null);
@@ -56,6 +59,14 @@ export default function Simulate() {
 
         setContent(content);
         setNote(note);
+
+        var vid = document.getElementById("video1");
+        vid.onplaying = function() {
+            console.log("The video is now playing");
+            console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
+            console.log("video width:" + vid.clientWidth); // returns the intrinsic height of the video
+
+        };
         console.log("response");
         console.log(response.message);
       } catch (e) {
@@ -68,58 +79,53 @@ export default function Simulate() {
     onLoad();
   }, [isAuthenticated]);
   
-  
-  
-
-
-
-
-
-
-
-/* 
-  state = {
-    loading: true
-  };
-  componentDidMount() {
-    if (this.video) {
-      this.video.addEventListener("loadeddata", () => {
-        this.setState({ loading: false });
-      });
-    }
-  }
-*/
 return (
-  /*
-  <video
-  autoPlay
-  muted
-  style={{
-    position: "fixed",
-    width: "100%",
-    left: 0,
-    top: 0,
-    animation: "fadeIn ease 3s"
-  }}
->
-  <source src="" type="video/mp4" />
-</video>
-*/
-<div className="Notes">
+  <>
+  
+  <Fade in={open1} >
+
+<div id="videodiv">
 {note && (
-  <video
+  <video id="video1"
   autoPlay
   style={{
-    position: "fixed",
+    zIndex: '9000',
+    position: "absolute",
     width: "80%",
     left: "10%",
     top: 100,
-    animation: "fadeIn ease 3s"
   }}
 >
   <source src={note.attachmentURL} type="video/mp4" />
 </video>
 )}
 </div> 
+</Fade>
+<Fade in={open2} >
+<div>
+{note && (
+  <video id="video2"
+  style={{
+    zIndex: '9000',
+    position: "absolute",
+    width: "80%",
+    left: "10%",
+    top: 100,
+  }}
+>
+  <source src={note.attachmentURL} type="video/mp4" />
+</video>
+)}
+</div> 
+</Fade>
+<Button style={{zIndex:'9999', bottom:100, position: "absolute"}}
+    onClick={() => setOpen1(!open1)}
+    onClick={() => setOpen2(!open2)}
+ //   aria-controls="example-fade-text"
+ //   aria-expanded={open1}
+  >
+        Toggle Video 1
+      </Button>
+</>
 );
 }
