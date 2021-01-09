@@ -129,7 +129,8 @@ export default function Record(props) {
         </Modal.Body>
         <Modal.Footer>
         <center>
-            <Button color="green" size="lg" onClick={() => setModalShow(false)}>OK</Button>
+        <Button color="green" size="lg" onClick={() => setModalShow(false)}>OK</Button>
+        <Button color="green" size="lg" onClick={() => setModalBody(getPrompt().prompt)}>SKIP</Button>
         </center>
         </Modal.Footer>
       </Modal>

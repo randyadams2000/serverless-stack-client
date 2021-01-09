@@ -5,7 +5,7 @@ import { Interactions } from 'aws-amplify';
 import { onError } from "../libs/errorLib";
 import { useAppContext } from "../libs/contextLib";
 import { API, Storage } from "aws-amplify";
-import {Button, Fade} from "react-bootstrap"
+import {Button, Fade, InputGroup, FormControl, InputGroupButton} from "react-bootstrap"
 
 
 
@@ -65,6 +65,9 @@ export default function Simulate() {
             console.log("The video is now playing");
             console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
             console.log("video width:" + vid.clientWidth); // returns the intrinsic height of the video
+            var but = document.getElementById("subButton");
+            but.style.top = vid.clientHeight;
+            console.log("herer is buttontop:" + but.style.top);
 
         };
         console.log("response");
@@ -78,6 +81,7 @@ export default function Simulate() {
   
     onLoad();
   }, [isAuthenticated]);
+
   
 return (
   <>
@@ -118,7 +122,15 @@ return (
 )}
 </div> 
 </Fade>
-<Button style={{zIndex:'9999', bottom:100, position: "absolute"}}
+    <FormControl style={{zIndex:'9999', width:"70%", left:"10%", position: "absolute"}}
+      placeholder="Ask me a question."
+      aria-label="Recipient's username"
+      aria-describedby="basic-addon2"
+    />
+
+
+
+<Button id="subButton" style={{zIndex:'9999', right:"10%", position: "absolute"}}
     onClick={() => setOpen1(!open1)}
     onClick={() => setOpen2(!open2)}
  //   aria-controls="example-fade-text"
