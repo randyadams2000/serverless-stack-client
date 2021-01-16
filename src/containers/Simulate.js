@@ -5,7 +5,9 @@ import { Interactions } from 'aws-amplify';
 import { onError } from "../libs/errorLib";
 import { useAppContext } from "../libs/contextLib";
 import { API, Storage } from "aws-amplify";
-import {Button, Fade, InputGroup, FormControl, InputGroupButton} from "react-bootstrap"
+import {Button, FormControl,Spinner} from "react-bootstrap"
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 
 
 export default function Simulate() {
@@ -67,6 +69,7 @@ export default function Simulate() {
         vid.play();
 
         vid.onplaying = function() {
+            setIsLoading(false);
             console.log("The video is now playing");
             console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
             console.log("video width:" + vid.clientWidth); // returns the intrinsic height of the video
@@ -95,6 +98,7 @@ export default function Simulate() {
   {
     var input = document.getElementById("inputField");
     var vid ="";
+    setIsLoading(true);
     console.log("Asking Lex for answer to :" + input);
     const response = await Interactions.send("Immortify", input.value);
     console.log("response is:" + response.message);
@@ -115,6 +119,7 @@ export default function Simulate() {
       setVideo2Z("9000");
       vid.play();
       vid.onplaying = function() {
+        setIsLoading(false);
         console.log("The video is now playing");
         console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
         console.log("video width:" + vid.clientWidth); // returns the intrinsic height of the video
@@ -135,6 +140,7 @@ export default function Simulate() {
       vid.play();
         console.log("playing video 2");
         vid.onplaying = function() {
+          setIsLoading(false);
           console.log("The video is now playing");
           console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
           console.log("video width:" + vid.clientWidth); // returns the intrinsic height of the video
@@ -157,7 +163,12 @@ function onKeyUp(event) {
   
 return (
   <>
-
+<Loader type="Puff" color="#00BFFF" height={100} width={100} visible={isLoading}  style={{
+    zIndex: 10000,
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+  }}/>
 {note && (
   <video id="video1"
   style={{
