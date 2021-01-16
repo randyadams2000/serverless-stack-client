@@ -8,7 +8,6 @@ import { API, Storage } from "aws-amplify";
 import {Button, Fade, InputGroup, FormControl, InputGroupButton} from "react-bootstrap"
 
 
-
 export default function Simulate() {
   const [open1, setOpen1] = useState(true);
   const [open2, setOpen2] = useState(false);
@@ -17,8 +16,10 @@ export default function Simulate() {
   const [note, setNote] = useState(null);
   const [URL, setURL] = useState(null);
   const [content, setContent] = useState("");
-  
-
+  const [video1Z, setVideo1Z] = useState("9001");
+  const [video2Z, setVideo2Z] = useState("9000");
+  const [videoSource1, setVideoSource1] = useState("");
+  const [videoSource2, setVideoSource2] = useState("");
 
   useEffect(() => {
     function loadNote(id) {
@@ -54,13 +55,17 @@ export default function Simulate() {
         
         // Log chatbot response
         const { content, attachment } = note;
-
+        console.log("Note.attachment="+attachment);
         note.attachmentURL = await Storage.vault.get(attachment);
+        console.log("URL is:" + note.attachmentURL);
 
         setContent(content);
         setNote(note);
 
         var vid = document.getElementById("video1");
+        vid.src = note.attachmentURL;
+        vid.play();
+
         vid.onplaying = function() {
             console.log("The video is now playing");
             console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
@@ -82,47 +87,112 @@ export default function Simulate() {
     onLoad();
   }, [isAuthenticated]);
 
+  function loadNote1(id) {
+    return API.get("notes", `/video/${id}`);
+  }
+
+  async function getAnswer()
+  {
+    var input = document.getElementById("inputField");
+    var vid ="";
+    console.log("Asking Lex for answer to :" + input);
+    const response = await Interactions.send("Immortify", input.value);
+    console.log("response is:" + response.message);
+    const note = await loadNote1(response.message);
+    // Log chatbot response
+    const { content, attachment } = note;
+    console.log("Note.attachment="+attachment);
+    note.attachmentURL = await Storage.vault.get(attachment);
+    console.log("URL is:" + note.attachmentURL);
+    setContent(content);
+    setNote(note);
+    if(video1Z == "9000")
+    {
+      vid = document.getElementById("video1");
+      vid.src = note.attachmentURL;
+      console.log("Video 1 to the front");
+      setVideo1Z("9001");
+      setVideo2Z("9000");
+      vid.play();
+      vid.onplaying = function() {
+        console.log("The video is now playing");
+        console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
+        console.log("video width:" + vid.clientWidth); // returns the intrinsic height of the video
+        var but = document.getElementById("subButton");
+        but.style.top = vid.clientHeight;
+        console.log("herer is buttontop:" + but.style.top);
+
+    };
+
+        console.log("playing video 1");
+    }
+    else{
+      vid = document.getElementById("video2");
+      vid.src = note.attachmentURL;
+      console.log("Video 2 to the front");
+      setVideo1Z("9000");
+      setVideo2Z("9001");
+      vid.play();
+        console.log("playing video 2");
+        vid.onplaying = function() {
+          console.log("The video is now playing");
+          console.log("video height:" + vid.clientHeight); // returns the intrinsic height of the video
+          console.log("video width:" + vid.clientWidth); // returns the intrinsic height of the video
+          var but = document.getElementById("subButton");
+          but.style.top = vid.clientHeight;
+          console.log("herer is buttontop:" + but.style.top);
+
+      };
+
+    }
+    var inputfield = document.getElementById("inputField");
+    inputfield.value = "";
+  }
+
+function onKeyUp(event) {
+  if(event.charCode==13){
+    getAnswer();    
+  } 
+}
   
 return (
   <>
-  
-  <Fade in={open1} >
 
-<div id="videodiv">
 {note && (
   <video id="video1"
-  autoPlay
   style={{
-    zIndex: '9000',
+    zIndex: video1Z,
     position: "absolute",
     width: "80%",
     left: "10%",
     top: 100,
   }}
 >
-  <source src={note.attachmentURL} type="video/mp4" />
 </video>
 )}
-</div> 
-</Fade>
-<Fade in={open2} >
-<div>
+
+
+
+
 {note && (
   <video id="video2"
   style={{
-    zIndex: '9000',
+    zIndex: video2Z,
     position: "absolute",
     width: "80%",
     left: "10%",
     top: 100,
   }}
 >
-  <source src={note.attachmentURL} type="video/mp4" />
 </video>
 )}
-</div> 
-</Fade>
-    <FormControl style={{zIndex:'9999', width:"70%", left:"10%", position: "absolute"}}
+
+
+    
+
+
+
+    <FormControl onKeyPress={onKeyUp} id="inputField" style={{zIndex:'9999', width:"70%", left:"10%", position: "absolute"}}
       placeholder="Ask me a question."
       aria-label="Recipient's username"
       aria-describedby="basic-addon2"
@@ -131,12 +201,11 @@ return (
 
 
 <Button id="subButton" style={{zIndex:'9999', right:"10%", position: "absolute"}}
-    onClick={() => setOpen1(!open1)}
-    onClick={() => setOpen2(!open2)}
- //   aria-controls="example-fade-text"
- //   aria-expanded={open1}
+ //   onClick={() => toggleVideo()}
+      onClick={() => getAnswer()}
+ 
   >
-        Toggle Video 1
+        Answer Question
       </Button>
 </>
 );

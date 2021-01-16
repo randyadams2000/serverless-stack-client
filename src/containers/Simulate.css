@@ -3,3 +3,41 @@
   bottom:0;
   left:0;
 }
+.component-wrapper {
+}
+
+.before-enter {
+  opacity: 0;
+}
+
+.entering {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.before-leave {
+  opacity: 1;
+}
+
+.leaving {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Cross-fade transition */
+
+.cross-fade-leave {
+  opacity: 1;
+}
+.cross-fade-leave.cross-fade-leave-active {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.cross-fade-enter {
+  opacity: 0;
+}
+.cross-fade-enter.cross-fade-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
