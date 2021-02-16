@@ -25,7 +25,9 @@ export default function Simulate() {
 
   useEffect(() => {
     function loadNote(id) {
+      console.log('Id:' + id);
       return API.get("notes", `/video/${id}`);
+
     }
     async function onLoad() {
       if (!isAuthenticated) {
@@ -54,6 +56,7 @@ export default function Simulate() {
         const response = await Interactions.send("Immortify", userInput);
 
         const note = await loadNote(response.message);
+
         
         // Log chatbot response
         const { content, attachment } = note;
@@ -91,7 +94,13 @@ export default function Simulate() {
   }, [isAuthenticated]);
 
   function loadNote1(id) {
-    return API.get("notes", `/video/${id}`);
+    var note = API.get("notes", `/video/${id}`);
+    console.log("THERETURN = " + note);
+    const { content, attachment } = note;
+    if (attachment == undefined)
+      alert("undeifind result");
+    console.log("attachment=" + attachment);
+    return note;
   }
 
   async function getAnswer()
@@ -105,6 +114,7 @@ export default function Simulate() {
     const note = await loadNote1(response.message);
     // Log chatbot response
     const { content, attachment } = note;
+
     console.log("Note.attachment="+attachment);
     note.attachmentURL = await Storage.vault.get(attachment);
     console.log("URL is:" + note.attachmentURL);

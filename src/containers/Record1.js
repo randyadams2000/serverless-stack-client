@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 //import { useHistory } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import { useAppContext } from "../libs/contextLib";
+//import {BackgroundRecorder} from "../components/BackgroundRecorder"
 import VideoRecorder from 'react-video-recorder'
 import { API } from "aws-amplify";
 import { s3UploadBlob } from "../libs/awsLib";
 import { onError } from "../libs/errorLib";
 import styled from 'styled-components';
 import "./Record.css";
- 
+
 
 export default function Record(props) {
  //   const history = useHistory();
@@ -20,8 +21,6 @@ export default function Record(props) {
   const [notes, setNotes] = useState([]);
   const {isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
-  const [content, setContent] = useState("");
-
 
   
     useEffect(() => {
@@ -34,13 +33,6 @@ export default function Record(props) {
             const notes = await loadNotes();
             setNotes(notes);
             var note = notes.shift();
-            var recorded = await isRecorded(note.prompt_id);
-            while(recorded != undefined){
-              note = notes.shift();
-              recorded = await isRecorded(note.prompt_id);
-              console.log("prompt_id=" + note.prompt_id);
-            }
-    
             setPromptIdent(note.prompt_id);
             setPromptContent(note.prompt);
             setModalBody(note.prompt);
@@ -54,31 +46,16 @@ export default function Record(props) {
       }, [isAuthenticated]);
       
       function loadNotes() {
-//        console.log(API.get("notes","/prompts"));
+        console.log(API.get("notes","/prompts"));
         return API.get("notes","/prompts");
       
       }
 
-
-       function isRecorded(id) {
-        return API.get("notes", `/video/${id}`);
-      }
-
-      async function getPrompt() {
+      function getPrompt() {
         var theNote = notes.shift();
-        if (theNote == undefined)
-        {
-          return undefined;
-        }
-        var recorded = await isRecorded(theNote.prompt_id);
-        while(recorded != undefined){
-          theNote = notes.shift();
-          recorded = await isRecorded(theNote.prompt_id);
-          console.log("prompt_id=" + theNote.prompt_id);
-        }
-      setPromptContent(theNote.prompt);
-          setPromptIdent(theNote.prompt_id);
-          return theNote;
+        setPromptContent(theNote.prompt);
+        setPromptIdent(theNote.prompt_id);
+        return theNote;
       };
       
       
@@ -88,26 +65,12 @@ export default function Record(props) {
         });
       }
 
-      async function skipPrompt(){
-        var thePrompt = await getPrompt();
-        if (thePrompt != undefined)
-        {
-          setModalBody(thePrompt.prompt);
-          setModalShow(true);
-          }
-      }
-
-
     async function uploadVideo(videoBlob) { 
         try {
             const content = promptContent;
             const promptId = promptIdent;
-            var thePrompt = await getPrompt();
-            if (thePrompt != undefined)
-            {
-              setModalBody(thePrompt.prompt);
-              setModalShow(true);
-              }
+            setModalBody(getPrompt().prompt);
+            setModalShow(true);
             const attachment = await s3UploadBlob("video.mp4",videoBlob);
             await createNote({ promptId, content, attachment });
 //            history.push("/");
@@ -138,7 +101,6 @@ export default function Record(props) {
     
 
     return (
-      
    <div className="Record">
         <VideoRecorder 
             isOnInitially
@@ -169,7 +131,7 @@ export default function Record(props) {
         <Modal.Footer>
         <center>
         <Button color="green" size="lg" onClick={() => setModalShow(false)}>OK</Button>
-        <Button color="green" size="lg" onClick={() => skipPrompt()}>SKIP</Button>
+        <Button color="green" size="lg" onClick={() => setModalBody(getPrompt().prompt)}>SKIP</Button>
         </center>
         </Modal.Footer>
       </Modal>
@@ -177,7 +139,5 @@ export default function Record(props) {
 
 
         </div>
-
-      
     );
 }

@@ -57,10 +57,10 @@ return (
                 </LinkContainer>
                 <LinkContainer to="/prompts">
                   <NavItem>Recordings</NavItem>
-                </LinkContainer>
+                  </LinkContainer>
                 <LinkContainer to="/record">
                   <NavItem>Record</NavItem>
-                </LinkContainer>
+                  </LinkContainer>
                 <LinkContainer to="/settings">
                   <NavItem>Settings</NavItem>
                 </LinkContainer>
